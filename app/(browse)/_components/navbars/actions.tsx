@@ -8,7 +8,7 @@ const Actions = async () => {
   const user = await currentUser();
 
   return (
-    <div className="flex items-center justify-end gap-x-2 ml-4 lg:ml-0">
+    <div className="flex items-center justify-end">
       {!user && (
         <SignInButton>
           <Button variant={"primary"} size={"sm"}>
@@ -17,7 +17,7 @@ const Actions = async () => {
         </SignInButton>
       )}
       {!!user && (
-        <div className="flex items-center gap-x-4">
+        <div className="flex items-center">
           <Button
             size={"sm"}
             variant={"ghost"}

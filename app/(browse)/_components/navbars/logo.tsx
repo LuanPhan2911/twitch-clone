@@ -11,7 +11,7 @@ const font = Poppins({
 const Logo = () => {
   return (
     <Link href={"/"}>
-      <div className="hidden lg:flex items-center gap-x-4 hover:opacity-75 transition">
+      <div className="flex items-center gap-x-4 hover:opacity-75 transition mr-2">
         <div className="bg-white rounded-full p-1">
           <Image
             src={"/twitch-icon.svg"}
@@ -20,7 +20,7 @@ const Logo = () => {
             alt="Logo"
           />
         </div>
-        <div className="flex flex-col items-center">
+        <div className="flex-col items-center hidden lg:flex">
           <p className={cn("text-xl font-semibold", font.className)}>GameHub</p>
           <p className={cn("text-sm text-muted-foreground", font.className)}>
             Let&apos;s play
