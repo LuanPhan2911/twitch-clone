@@ -1,5 +1,6 @@
 "use client";
 
+import ActionTooltip from "@/components/action-tooltip";
 import LiveBadge from "@/components/live-badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -22,32 +23,34 @@ const UserItem = ({ imageUrl, isLive, username }: UserItemProps) => {
   const isActive = pathname === href;
 
   return (
-    <Button
-      variant={"ghost"}
-      className={cn(
-        "w-full h-14 flex",
-        collapsed ? "justify-center" : "justify-start",
-        isActive && "bg-accent"
-      )}
-    >
-      <Link href={href}>
-        <div
-          className={cn(
-            "flex items-center w-full gap-x-4",
-            collapsed && " justify-center"
-          )}
-        >
-          <UserAvatar
-            username={username}
-            imageUrl={imageUrl}
-            isLive={isLive}
-            showBadge
-          />
-          {!collapsed && <p className="truncate">{username}</p>}
-          {!collapsed && isLive && <LiveBadge className="ml-auto" />}
-        </div>
-      </Link>
-    </Button>
+    <ActionTooltip label={username} align="center" side="right">
+      <Button
+        variant={"ghost"}
+        className={cn(
+          "w-full h-14 flex",
+          collapsed ? "justify-center" : "justify-start",
+          isActive && "bg-accent"
+        )}
+      >
+        <Link href={href}>
+          <div
+            className={cn(
+              "flex items-center w-full gap-x-4",
+              collapsed && " justify-center"
+            )}
+          >
+            <UserAvatar
+              username={username}
+              imageUrl={imageUrl}
+              isLive={isLive}
+              showBadge
+            />
+            {!collapsed && <p className="truncate">{username}</p>}
+            {!collapsed && isLive && <LiveBadge className="ml-auto" />}
+          </div>
+        </Link>
+      </Button>
+    </ActionTooltip>
   );
 };
 const UserItemSkeleton = () => {

@@ -15,7 +15,7 @@ const Toggle = () => {
       {!collapsed && (
         <div className="p-3 pl-6 mb-2 flex items-center w-full">
           <p className="font-semibold text-primary">For you</p>
-          <ActionTooltip label={label}>
+          <ActionTooltip label={label} align="center" side="right">
             <Button
               className="h-auto p-2 ml-auto"
               variant={"ghost"}
@@ -28,7 +28,7 @@ const Toggle = () => {
       )}
       {collapsed && (
         <div className="hidden lg:flex w-full items-center justify-center pt-4 mb-4">
-          <ActionTooltip label={label}>
+          <ActionTooltip label={label} align="center" side="right">
             <Button className="p-2 h-auto" variant={"ghost"} onClick={onExpand}>
               <ArrowRight className="h-5 w-5" />
             </Button>

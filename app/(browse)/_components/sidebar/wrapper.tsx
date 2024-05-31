@@ -6,6 +6,7 @@ import { ReactNode, useEffect } from "react";
 import { ToggleSkeleton } from "./toggle";
 import { RecommendedSkeleton } from "./recommended";
 import { useIsClient } from "usehooks-ts";
+import { FollowingSkeleton } from "./following";
 
 interface WrapperProps {
   children: ReactNode;
@@ -29,6 +30,7 @@ const Wrapper = ({ children }: WrapperProps) => {
     left-0 border-r border-[#2d2d35] z-50 transition-all"
       >
         <ToggleSkeleton />
+        <FollowingSkeleton />
         <RecommendedSkeleton />
       </aside>
     );
