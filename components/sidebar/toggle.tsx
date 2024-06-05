@@ -2,11 +2,10 @@
 
 import ActionTooltip from "@/components/action-tooltip";
 import { Button } from "@/components/ui/button";
-import { Skeleton } from "@/components/ui/skeleton";
 import { useSidebar } from "@/stores/use-sidebar";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
-const Toggle = () => {
+export const Toggle = ({ title = "Home" }: { title?: string }) => {
   const { collapsed, onCollapse, onExpand } = useSidebar();
 
   const label = collapsed ? "Expand" : "Collapse";
@@ -14,7 +13,7 @@ const Toggle = () => {
     <>
       {!collapsed && (
         <div className="p-3 pl-6 mb-2 flex items-center w-full">
-          <p className="font-semibold text-primary">For you</p>
+          <p className="font-semibold text-primary">{title}</p>
           <ActionTooltip label={label} align="center" side="right">
             <Button
               className="h-auto p-2 ml-auto"
@@ -38,13 +37,3 @@ const Toggle = () => {
     </>
   );
 };
-
-const ToggleSkeleton = () => {
-  return (
-    <div className="p-3 pl-6 mb-2 hidden lg:flex items-center justify-between w-full">
-      <Skeleton className="h-6 w-[100px]" />
-      <Skeleton className="h-6 w-6" />
-    </div>
-  );
-};
-export { Toggle, ToggleSkeleton };

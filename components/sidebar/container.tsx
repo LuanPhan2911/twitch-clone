@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { useSidebar } from "@/stores/use-sidebar";
 import { ReactNode } from "react";
 
-const Container = ({ children }: { children: ReactNode }) => {
+export const Container = ({ children }: { children: ReactNode }) => {
   const { collapsed } = useSidebar();
   return (
     <div className={cn("flex-1 pl-60", collapsed && "pl-[70px]")}>
@@ -11,5 +11,3 @@ const Container = ({ children }: { children: ReactNode }) => {
     </div>
   );
 };
-
-export default Container;

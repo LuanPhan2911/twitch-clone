@@ -8,7 +8,7 @@ const font = Poppins({
   weight: ["200", "300", "400", "500", "600", "700", "800"],
 });
 
-const Logo = () => {
+const Logo = ({ title, subtitle }: { title: string; subtitle: string }) => {
   return (
     <Link href={"/"}>
       <div className="flex items-center gap-x-4 hover:opacity-75 transition mr-2">
@@ -21,9 +21,9 @@ const Logo = () => {
           />
         </div>
         <div className="flex-col items-center hidden lg:flex">
-          <p className={cn("text-xl font-semibold", font.className)}>GameHub</p>
+          <p className={cn("text-xl font-semibold", font.className)}>{title}</p>
           <p className={cn("text-sm text-muted-foreground", font.className)}>
-            Let&apos;s play
+            {subtitle}
           </p>
         </div>
       </div>

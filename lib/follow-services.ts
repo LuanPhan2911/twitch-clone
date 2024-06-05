@@ -121,6 +121,11 @@ export const getFollowedUser = async () => {
       where: {
         followerId: self.id,
         following: {
+          blockers: {
+            none: {
+              blockedId: self.id,
+            },
+          },
           blockedBy: {
             none: {
               blockerId: self.id,
@@ -132,6 +137,7 @@ export const getFollowedUser = async () => {
         following: true,
       },
     });
+
     return follows;
   } catch (error) {
     return [];

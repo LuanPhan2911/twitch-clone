@@ -18,6 +18,9 @@ export const getRecommendList = async () => {
         },
         take: 5,
         where: {
+          id: {
+            not: user.id,
+          },
           followedBy: {
             none: {
               followerId: user.id,
@@ -27,9 +30,6 @@ export const getRecommendList = async () => {
             none: {
               blockerId: user.id,
             },
-          },
-          NOT: {
-            id: user.id,
           },
         },
       });

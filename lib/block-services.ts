@@ -39,7 +39,7 @@ export const blockUser = async ({ id }: { id: string }) => {
     throw new Error("User not found");
   }
   if (otherUser.id === self.id) {
-    return null;
+    throw new Error("You cannot block yourself");
   }
   const existingBlock = await db.block.findUnique({
     where: {

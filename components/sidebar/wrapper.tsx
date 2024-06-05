@@ -3,10 +3,8 @@ import { useMedia } from "@/hooks/use-media";
 import { cn } from "@/lib/utils";
 import { useSidebar } from "@/stores/use-sidebar";
 import { ReactNode, useEffect } from "react";
-import { ToggleSkeleton } from "./toggle";
-import { RecommendedSkeleton } from "./recommended";
 import { useIsClient } from "usehooks-ts";
-import { FollowingSkeleton } from "./following";
+import { SidebarItemSkeleton, ToggleSkeleton } from "./skeleton";
 
 interface WrapperProps {
   children: ReactNode;
@@ -30,8 +28,7 @@ const Wrapper = ({ children }: WrapperProps) => {
     left-0 border-r border-[#2d2d35] z-50 transition-all"
       >
         <ToggleSkeleton />
-        <FollowingSkeleton />
-        <RecommendedSkeleton />
+        <SidebarItemSkeleton />
       </aside>
     );
   }

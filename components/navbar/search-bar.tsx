@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import queryString from "query-string";
 import { useState } from "react";
 
-const SearchBar = () => {
+const SearchBar = ({ path }: { path: string }) => {
   const router = useRouter();
   const [value, setValue] = useState("");
 
@@ -18,7 +18,7 @@ const SearchBar = () => {
     }
     const url = queryString.stringifyUrl(
       {
-        url: "/search",
+        url: path,
         query: {
           term: value,
         },
