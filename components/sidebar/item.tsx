@@ -17,8 +17,9 @@ export const CommonSidebarItem = ({
   const { collapsed } = useSidebar();
 
   return (
-    <ActionTooltip label={label} align="center" side="right">
+    <ActionTooltip label={label} align="start" side="right">
       <Button
+        asChild
         variant={"ghost"}
         className={cn(
           "w-full h-14 flex",

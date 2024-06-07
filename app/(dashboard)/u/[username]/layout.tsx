@@ -2,6 +2,9 @@ import { getSelfByUsername } from "@/lib/auth-services";
 import { redirect } from "next/navigation";
 import { NavBar } from "./(home)/_components/navbar";
 import { Sidebar } from "./(home)/_components/sidebar";
+import { Container } from "@/components/sidebar/container";
+import { Suspense } from "react";
+import { CommonSidebarSkeleton } from "@/components/sidebar";
 
 interface CreatorLayoutProps {
   params: {
@@ -19,8 +22,10 @@ const CreatorLayout = async ({ children, params }: CreatorLayoutProps) => {
     <>
       <NavBar />
       <div className="flex h-full pt-20">
-        <Sidebar />
-        {children}
+        <Suspense fallback={<CommonSidebarSkeleton />}>
+          <Sidebar />
+        </Suspense>
+        <Container>{children}</Container>
       </div>
     </>
   );
