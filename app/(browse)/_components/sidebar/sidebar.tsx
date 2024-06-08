@@ -7,8 +7,8 @@ import { CommonSidebar } from "@/components/sidebar";
 
 export const Sidebar = async () => {
   const recommended = await getRecommendList();
-
   const following = await getFollowedUser();
+
   return (
     <CommonSidebar title="For you">
       <Following data={following} />

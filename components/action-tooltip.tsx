@@ -13,6 +13,7 @@ interface ActionTooltipProps {
   children: React.ReactNode;
   side?: "top" | "right" | "bottom" | "left";
   align?: "start" | "center" | "end";
+  asChild?: boolean;
 }
 
 const ActionTooltip: FunctionComponent<ActionTooltipProps> = ({
@@ -20,12 +21,13 @@ const ActionTooltip: FunctionComponent<ActionTooltipProps> = ({
   children,
   side,
   align,
+  asChild,
 }) => {
   return (
     <TooltipProvider>
       <Tooltip delayDuration={50}>
         <TooltipTrigger asChild>{children}</TooltipTrigger>
-        <TooltipContent side={side} align={align}>
+        <TooltipContent side={side} align={align} asChild>
           <p className="font-semibold text-sm capitalize">
             {label?.toLowerCase()}
           </p>

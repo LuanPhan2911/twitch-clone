@@ -1,5 +1,6 @@
 import { currentUser } from "@clerk/nextjs/server";
 import { db } from "./db";
+import { UserStream } from "@/types";
 
 export const getRecommendList = async () => {
   try {
@@ -10,13 +11,12 @@ export const getRecommendList = async () => {
       },
     });
 
-    let users = [];
+    let users;
     if (user) {
       users = await db.user.findMany({
         orderBy: {
           createdAt: "desc",
         },
-        take: 5,
         where: {
           id: {
             not: user.id,
@@ -32,12 +32,25 @@ export const getRecommendList = async () => {
             },
           },
         },
+        include: {
+          stream: {
+            select: {
+              isLive: true,
+            },
+          },
+        },
       });
     } else {
       users = await db.user.findMany({
-        take: 5,
         orderBy: {
           createdAt: "desc",
+        },
+        include: {
+          stream: {
+            select: {
+              isLive: true,
+            },
+          },
         },
       });
     }

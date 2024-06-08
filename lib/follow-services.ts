@@ -1,3 +1,4 @@
+import { FollowingUserStream } from "@/types";
 import { getSelf } from "./auth-services";
 import { db } from "./db";
 
@@ -134,7 +135,15 @@ export const getFollowedUser = async () => {
         },
       },
       include: {
-        following: true,
+        following: {
+          include: {
+            stream: {
+              select: {
+                isLive: true,
+              },
+            },
+          },
+        },
       },
     });
 
