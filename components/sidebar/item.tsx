@@ -17,7 +17,7 @@ export const CommonSidebarItem = ({
   const { collapsed } = useSidebar();
 
   return (
-    <ActionTooltip label={label} align="start" side="right">
+    <ActionTooltip label={label} align="start" side="right" asChild>
       <Button
         asChild
         variant={"ghost"}

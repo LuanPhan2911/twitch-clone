@@ -8,7 +8,7 @@ interface SidebarStore {
 
 export const useSidebar = create<SidebarStore>((set) => {
   return {
-    collapsed: true,
+    collapsed: false,
     onCollapse: () => set({ collapsed: true }),
     onExpand: () => set({ collapsed: false }),
   };
