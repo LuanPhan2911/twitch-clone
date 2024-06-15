@@ -11,11 +11,12 @@ export const ChatMessage = ({ message }: Props) => {
       <p className="text-sm text-white/40">
         {format(message.timestamp, "HH:MM")}
       </p>
-      <div className="flex flex-gap items-baseline gap-1 grow">
+      <div className="flex flex-wrap items-baseline gap-1 grow">
         <p className="text-sm font-semibold whitespace-nowrap">
           <span className="truncate" style={{ color: color }}>
             {message?.from?.name}
           </span>
+          :
         </p>
         <p className="text-sm break-all">{message.message}</p>
       </div>

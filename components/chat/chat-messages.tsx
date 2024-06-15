@@ -1,5 +1,6 @@
 import { ReceivedChatMessage } from "@livekit/components-react";
 import { ChatMessage } from "./chat-message";
+import { Skeleton } from "../ui/skeleton";
 
 type Props = {
   messages: ReceivedChatMessage[];
@@ -20,6 +21,15 @@ export const ChatMessages = ({ messages, isHidden }: Props) => {
       {messages.map((message) => {
         return <ChatMessage message={message} key={message.timestamp} />;
       })}
+    </div>
+  );
+};
+export const ChatMessagesSkeleton = () => {
+  return (
+    <div className="flex flex-col gap-y-2 flex-1 p-3 h-full">
+      <Skeleton className="w-1/2 h-6" />
+      <Skeleton className="w-1/2 h-6" />
+      <Skeleton className="w-1/2 h-6" />
     </div>
   );
 };

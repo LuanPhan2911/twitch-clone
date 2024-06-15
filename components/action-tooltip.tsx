@@ -27,7 +27,7 @@ const ActionTooltip: FunctionComponent<ActionTooltipProps> = ({
     <TooltipProvider>
       <Tooltip delayDuration={50}>
         <TooltipTrigger asChild={asChild}>{children}</TooltipTrigger>
-        <TooltipContent side={side} align={align}>
+        <TooltipContent side={side} align={align} asChild={asChild}>
           <p className="font-semibold text-sm capitalize">
             {label?.toLowerCase()}
           </p>

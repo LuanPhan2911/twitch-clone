@@ -9,6 +9,7 @@ import { ConnectionState, Track } from "livekit-client";
 import { OfflineVideo } from "./offline-video";
 import { LoadingVideo } from "./loading-video";
 import { LiveVideo } from "./live-video";
+import { Skeleton } from "../ui/skeleton";
 
 type Props = {
   hostName: string;
@@ -32,4 +33,11 @@ export const Video = ({ hostIdentity, hostName }: Props) => {
     content = <LiveVideo participant={participant} />;
   }
   return <div className="aspect-video border-b group relative">{content}</div>;
+};
+export const VideoSkeleton = () => {
+  return (
+    <div className="aspect-video border-x border-background">
+      <Skeleton className="h-full w-full rounded-none" />
+    </div>
+  );
 };

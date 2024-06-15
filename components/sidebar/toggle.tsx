@@ -14,7 +14,7 @@ export const Toggle = ({ title = "Home" }: { title?: string }) => {
       {!collapsed && (
         <div className="p-3 pl-6 mb-2 flex items-center w-full">
           <p className="font-semibold text-primary">{title}</p>
-          <ActionTooltip label={label} align="center" side="right">
+          <ActionTooltip label={label} align="center" side="right" asChild>
             <Button
               className="h-auto p-2 ml-auto"
               variant={"ghost"}
