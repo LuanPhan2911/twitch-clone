@@ -1,4 +1,5 @@
 "use client";
+
 import { useModal } from "@/stores/use-modal";
 import {
   Dialog,
@@ -13,21 +14,16 @@ type Props = {
   title: React.ReactNode | string;
   description?: string;
   children: React.ReactNode;
-  cancelButton: React.ReactNode;
-  confirmButton: React.ReactNode;
   isOpen: boolean;
-  onClose: () => void;
 };
 
 export const CommonModal = ({
-  cancelButton,
-  confirmButton,
   title,
   description,
   children,
   isOpen,
-  onClose,
 }: Props) => {
+  const { onClose } = useModal();
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent>
@@ -38,10 +34,6 @@ export const CommonModal = ({
           )}
         </DialogHeader>
         {children}
-        <div className="flex items-center justify-between">
-          <DialogClose>{cancelButton}</DialogClose>
-          {confirmButton}
-        </div>
       </DialogContent>
     </Dialog>
   );

@@ -39,26 +39,7 @@ export const GenerateKeyModal = ({}: Props) => {
     });
   };
   return (
-    <CommonModal
-      isOpen={isOpenModal}
-      onClose={onClose}
-      title={"Generate Connection"}
-      cancelButton={
-        <Button variant={"ghost"} size={"sm"} disabled={isSpending}>
-          Cancel
-        </Button>
-      }
-      confirmButton={
-        <Button
-          variant={"primary"}
-          size={"sm"}
-          disabled={isSpending}
-          onClick={onCreateIngress}
-        >
-          Generate
-        </Button>
-      }
-    >
+    <CommonModal isOpen={isOpenModal} title={"Generate Connection"}>
       <Select
         value={ingress}
         onValueChange={(value) => setIngress(value)}
@@ -79,6 +60,24 @@ export const GenerateKeyModal = ({}: Props) => {
           This action will reset active streams using current connection!
         </AlertDescription>
       </Alert>
+      <div className="flex items-center justify-between">
+        <Button
+          variant={"ghost"}
+          size={"sm"}
+          disabled={isSpending}
+          onClick={onClose}
+        >
+          Cancel
+        </Button>
+        <Button
+          variant={"primary"}
+          size={"sm"}
+          disabled={isSpending}
+          onClick={onCreateIngress}
+        >
+          Generate
+        </Button>
+      </div>
     </CommonModal>
   );
 };

@@ -2,11 +2,7 @@ import { URLCard } from "./_components/url-card";
 import { getSelf } from "@/lib/auth-services";
 import { getStreamByUserId } from "@/lib/stream-services";
 import { KeyCard } from "./_components/key-card";
-import {
-  GenerateKeyButton,
-  GenerateKeyModal,
-} from "./_components/generate-key-modal";
-import { Button } from "@/components/ui/button";
+import { GenerateKeyButton } from "./_components/generate-key-modal";
 
 const KeyPage = async () => {
   const self = await getSelf();

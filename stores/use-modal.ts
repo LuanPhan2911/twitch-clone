@@ -1,6 +1,9 @@
 import { create } from "zustand";
-export type ModalType = "create-ingress";
-interface ModalData {}
+export type ModalType = "create-ingress" | "edit-stream-info";
+interface ModalData {
+  initialName?: string;
+  initialThumbnailUrl?: string | null;
+}
 interface ModalStore {
   type: ModalType | null;
   isOpen: boolean;
