@@ -10,14 +10,14 @@ interface Props {
 
 const CreatorPage = async ({ params }: Props) => {
   const externalUser = await currentUser();
-  const user = await getUserByUsername(params.username);
-  if (!user || user.externalUserId !== externalUser?.id || !user.stream) {
+  const host = await getUserByUsername(params.username);
+  if (!host || host.externalUserId !== externalUser?.id || !host.stream) {
     throw new Error("Unauthorized");
   }
 
   return (
     <div className="h-full">
-      <StreamPlayer user={user} stream={user.stream} isFollowing />
+      <StreamPlayer host={host} stream={host.stream} isFollowing />
     </div>
   );
 };

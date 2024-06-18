@@ -1,8 +1,9 @@
+import { Stream, User } from "@prisma/client";
 import { create } from "zustand";
-export type ModalType = "create-ingress" | "edit-stream-info";
+export type ModalType = "create-ingress" | "edit-stream-info" | "edit-user";
 interface ModalData {
-  initialName?: string;
-  initialThumbnailUrl?: string | null;
+  stream?: Partial<Stream>;
+  user?: Partial<User>;
 }
 interface ModalStore {
   type: ModalType | null;

@@ -37,10 +37,7 @@ export const InfoCard = ({
               Maximum your visibility
             </p>
           </div>
-          <InfoModalButton
-            initialName={name}
-            initialThumbnailUrl={thumbnailUrl}
-          />
+          <InfoModalButton name={name} thumbnailUrl={thumbnailUrl} />
         </div>
         <Separator />
         <div className="p-4 lg:p-6 space-y-4">

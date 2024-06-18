@@ -9,17 +9,23 @@ import { Chat, ChatSkeleton } from "../chat";
 import { ChatToggle } from "../chat/chat-toggle";
 import { Header, HeaderSkeleton } from "./header";
 import { InfoCard } from "./info-card";
+import { AboutCard } from "./about-card";
 type Props = {
-  user: User & {
+  host: User & {
     stream: Stream | null;
+    _count: { followedBy: number };
   };
   stream: Stream;
   isFollowing: boolean;
 };
-export const StreamPlayer = ({ user, stream, isFollowing }: Props) => {
-  const { identity, name, token } = useViewToken(user.id);
+export const StreamPlayer = ({ host, stream, isFollowing }: Props) => {
+  const {
+    identity: viewerIdentity,
+    name: viewerName,
+    token,
+  } = useViewToken(host.id);
   const { collapsed } = useChatSidebar();
-  if (!token || !name || !identity) {
+  if (!token || !viewerName || !viewerIdentity) {
     return <StreamPlayerSkeleton />;
   }
   return (
@@ -42,27 +48,34 @@ export const StreamPlayer = ({ user, stream, isFollowing }: Props) => {
           className="space-y-4 col-span-1 lg:col-span-2 
         xl:col-span-2 2xl:col-span-5 lg:overflow-y-auto hidden-scrollbar pb-10"
         >
-          <Video hostName={user.username} hostIdentity={user.id} />
+          <Video hostName={host.username} hostIdentity={host.id} />
           <Header
-            hostIdentity={user.id}
-            hostName={user.username}
-            viewerIdentity={identity}
-            imageUrl={user.imageUrl}
+            hostIdentity={host.id}
+            hostName={host.username}
+            viewerIdentity={viewerIdentity}
+            imageUrl={host.imageUrl}
             isFollowing={isFollowing}
             name={stream.name}
           />
           <InfoCard
-            hostIdentity={user.id}
-            viewerIdentity={identity}
+            hostIdentity={host.id}
+            viewerIdentity={viewerIdentity}
             name={stream.name}
             thumbnailUrl={stream.thumbnailUrl}
+          />
+          <AboutCard
+            bio={host.bio}
+            followedCount={host._count.followedBy}
+            hostIdentity={host.id}
+            hostName={host.username}
+            viewerIdentity={viewerIdentity}
           />
         </div>
         <div className={cn("col-span-1", collapsed && "hidden")}>
           <Chat
-            viewerName={name}
-            hostName={user.username}
-            hostIdentity={user.id}
+            viewerName={viewerName}
+            hostName={host.username}
+            hostIdentity={host.id}
             isFollowing={isFollowing}
             isChatEnable={stream.isChatEnable}
             isChatDelay={stream.isChatDelay}

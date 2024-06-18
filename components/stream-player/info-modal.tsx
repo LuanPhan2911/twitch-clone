@@ -15,8 +15,8 @@ import Image from "next/image";
 import { Trash } from "lucide-react";
 
 type Props = {
-  initialName: string;
-  initialThumbnailUrl: string | null;
+  name: string;
+  thumbnailUrl: string | null;
 };
 export const InfoModal = () => {
   const { isOpen, type, data, onClose } = useModal();
@@ -25,13 +25,13 @@ export const InfoModal = () => {
   const [thumbnailUrl, setThumbnailUrl] = useState("");
   const router = useRouter();
   useEffect(() => {
-    if (data?.initialName) {
-      setName(data?.initialName);
+    if (data?.stream?.name) {
+      setName(data?.stream?.name);
     }
-    if (data?.initialThumbnailUrl) {
-      setThumbnailUrl(data?.initialThumbnailUrl);
+    if (data?.stream?.thumbnailUrl) {
+      setThumbnailUrl(data?.stream?.thumbnailUrl);
     }
-  }, [data?.initialName, data?.initialThumbnailUrl]);
+  }, [data?.stream]);
   const [isPending, startTransition] = useTransition();
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -130,15 +130,14 @@ export const InfoModal = () => {
   );
 };
 
-export const InfoModalButton = ({
-  initialName,
-  initialThumbnailUrl,
-}: Props) => {
+export const InfoModalButton = ({ name, thumbnailUrl }: Props) => {
   const { onOpen } = useModal();
   const onClick = () => {
     onOpen("edit-stream-info", {
-      initialName,
-      initialThumbnailUrl,
+      stream: {
+        name,
+        thumbnailUrl,
+      },
     });
   };
   return (
