@@ -29,9 +29,7 @@ export const CommunityItem = ({
       return;
     }
     startTransition(() => {
-      onBlock({
-        id: participantIdentity,
-      })
+      onBlock(participantIdentity)
         .then(() => toast.success(`Blocked ${participantName}`))
         .catch(() => toast.error("Something went wrong"));
     });
@@ -39,17 +37,17 @@ export const CommunityItem = ({
   return (
     <div
       className={cn(
-        "group flex items-center justify-center w-full p-2 rounded-md text-sm hover:bg-white/5",
+        "group flex items-center w-full p-2 rounded-md text-sm hover:bg-white/5",
         isPending && "opacity-50 pointer-events-none"
       )}
     >
       <p style={{ color }}>{participantName}</p>
       {isHost && !isSelf && (
-        <ActionTooltip label="Block">
+        <ActionTooltip label="Block" asChild>
           <Button
             disabled={isPending}
             onClick={handleBlock}
-            className="h-auto w-auto p-1 opacity-0 group-hover:opacity-100 transition"
+            className="h-auto w-auto p-1 opacity-0 group-hover:opacity-100 transition ml-auto"
           >
             <MinusCircle className="h-5 w-5 text-muted-foreground" />
           </Button>

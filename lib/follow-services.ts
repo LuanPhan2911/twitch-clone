@@ -2,7 +2,7 @@ import { FollowingUserStream } from "@/types";
 import { getSelf } from "./auth-services";
 import { db } from "./db";
 
-export const isFollowingUser = async ({ id }: { id: string }) => {
+export const isFollowingUser = async (id: string) => {
   try {
     const self = await getSelf();
 
@@ -34,7 +34,7 @@ export const isFollowingUser = async ({ id }: { id: string }) => {
   }
 };
 
-export const followUser = async ({ id }: { id: string }) => {
+export const followUser = async (id: string) => {
   const self = await getSelf();
   const otherUser = await db.user.findUnique({
     where: {
@@ -74,7 +74,7 @@ export const followUser = async ({ id }: { id: string }) => {
 
   return follow;
 };
-export const unFollowUser = async ({ id }: { id: string }) => {
+export const unFollowUser = async (id: string) => {
   const self = await getSelf();
   const otherUser = await db.user.findUnique({
     where: {

@@ -20,7 +20,7 @@ export const Actions = ({ hostIdentity, isFollowing, isHost }: Props) => {
   const [isPending, startTransition] = useTransition();
   const handleFollow = () => {
     startTransition(() => {
-      onFollow({ id: hostIdentity })
+      onFollow(hostIdentity)
         .then((data) =>
           toast.success(`You are now following ${data.following.username}`)
         )
@@ -29,7 +29,7 @@ export const Actions = ({ hostIdentity, isFollowing, isHost }: Props) => {
   };
   const handleUnFollow = () => {
     startTransition(() => {
-      onUnFollow({ id: hostIdentity })
+      onUnFollow(hostIdentity)
         .then((data) =>
           toast.success(`You are now unfollowing ${data.following.username}`)
         )

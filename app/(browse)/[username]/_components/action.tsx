@@ -15,13 +15,13 @@ export const Action = ({ isFollowing, userId }: ActionProps) => {
   const handleFollow = () => {
     startTransition(() => {
       if (isFollowing) {
-        onUnFollow({ id: userId })
+        onUnFollow(userId)
           .then((data) =>
             toast.success(`You are not now following ${data.follower.username}`)
           )
           .catch(() => toast.error("Something went wrong"));
       } else {
-        onFollow({ id: userId })
+        onFollow(userId)
           .then((data) =>
             toast.success(`You are now following ${data.follower.username}`)
           )
@@ -31,7 +31,7 @@ export const Action = ({ isFollowing, userId }: ActionProps) => {
   };
   const handleBlock = () => {
     startTransition(() => {
-      onBlock({ id: userId })
+      onBlock(userId)
         .then((data) => toast.success(`You block ${data?.blocking.username}`))
         .catch(() => toast.error("Something went wrong"));
     });

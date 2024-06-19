@@ -1,62 +1,41 @@
 import { currentUser } from "@clerk/nextjs/server";
 import { db } from "./db";
-import { UserStream } from "@/types";
+import { getSelf } from "./auth-services";
 
 export const getRecommendList = async () => {
   try {
-    const self = await currentUser();
-    const user = await db.user.findUnique({
+    const self = await getSelf();
+    return await db.user.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
       where: {
-        externalUserId: self?.id,
+        id: {
+          not: self.id,
+        },
+        followedBy: {
+          none: {
+            followerId: self.id,
+          },
+        },
+        blockedBy: {
+          none: {
+            blockerId: self.id,
+          },
+        },
+      },
+      include: {
+        stream: true,
       },
     });
-
-    let users;
-    if (user) {
-      users = await db.user.findMany({
-        orderBy: {
-          createdAt: "desc",
-        },
-        where: {
-          id: {
-            not: user.id,
-          },
-          followedBy: {
-            none: {
-              followerId: user.id,
-            },
-          },
-          blockedBy: {
-            none: {
-              blockerId: user.id,
-            },
-          },
-        },
-        include: {
-          stream: {
-            select: {
-              isLive: true,
-            },
-          },
-        },
-      });
-    } else {
-      users = await db.user.findMany({
-        orderBy: {
-          createdAt: "desc",
-        },
-        include: {
-          stream: {
-            select: {
-              isLive: true,
-            },
-          },
-        },
-      });
-    }
-
-    return users;
   } catch (error) {
-    return [];
+    return await db.user.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+      include: {
+        stream: true,
+      },
+    });
   }
 };

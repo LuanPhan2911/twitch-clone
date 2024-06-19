@@ -1,7 +1,7 @@
 import { getSelf } from "./auth-services";
 import { db } from "./db";
 
-export const isBlockedByUser = async ({ id }: { id: string }) => {
+export const isBlockedByUser = async (id: string) => {
   try {
     const self = await getSelf();
     const otherUser = await db.user.findUnique({
@@ -28,7 +28,7 @@ export const isBlockedByUser = async ({ id }: { id: string }) => {
     return false;
   }
 };
-export const blockUser = async ({ id }: { id: string }) => {
+export const blockUser = async (id: string) => {
   const self = await getSelf();
   const otherUser = await db.user.findUnique({
     where: {
@@ -64,7 +64,7 @@ export const blockUser = async ({ id }: { id: string }) => {
   return newBlock;
 };
 
-export const unBlockUser = async ({ id }: { id: string }) => {
+export const unBlockUser = async (id: string) => {
   const self = await getSelf();
   const otherUser = await db.user.findUnique({
     where: {

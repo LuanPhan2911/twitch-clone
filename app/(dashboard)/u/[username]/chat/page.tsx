@@ -5,9 +5,7 @@ import { getStreamByUserId } from "@/lib/stream-services";
 
 const ChatPage = async () => {
   const self = await getSelf();
-  const stream = await getStreamByUserId({
-    userId: self.id,
-  });
+  const stream = await getStreamByUserId(self.id);
   if (!stream) {
     throw new Error("Stream not found");
   }

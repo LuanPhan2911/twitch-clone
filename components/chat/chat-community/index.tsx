@@ -22,7 +22,6 @@ export const ChatCommunity = ({ hostName, isHidden, viewerName }: Props) => {
     setValue(newValue);
     setDebounceValue(newValue);
   };
-  console.log(participants);
 
   const filteredParticipants = useMemo(() => {
     const deduplicated = participants.reduce((acc, participant) => {

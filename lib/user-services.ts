@@ -14,9 +14,7 @@ export const getUserByUsername = async (username: string) => {
       },
     },
   });
-  if (!user) {
-    throw new Error("Invalid User ");
-  }
+
   return user;
 };
 export const getUserById = async (id: string) => {
