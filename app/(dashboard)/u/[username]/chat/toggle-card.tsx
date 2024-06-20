@@ -1,8 +1,9 @@
 "use client";
 import { useTransition } from "react";
-import { Switch } from "./ui/switch";
+import { Switch } from "@/components/ui/switch";
 import { toast } from "sonner";
-import { Skeleton } from "./ui/skeleton";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Stream } from "@prisma/client";
 
 export type ChatFieldType =
   | "isChatEnable"
@@ -13,7 +14,9 @@ interface ToggleCardProps {
   value: boolean;
   label: string;
   toastSuccessMessage?: string;
-  onUpdate: (values: Partial<Record<ChatFieldType, boolean>>) => Promise<any>;
+  onUpdate: (
+    values: Partial<Record<ChatFieldType, boolean>>
+  ) => Promise<Stream>;
 }
 export function ToggleCard({
   field,
@@ -26,7 +29,9 @@ export function ToggleCard({
   const onChange = () => {
     startTransition(() => {
       onUpdate({ [field]: !value })
-        .then((data) => toast.success(toastSuccessMessage || "Update success"))
+        .then((stream) => {
+          toast.success(toastSuccessMessage || "Update success");
+        })
         .catch(() => toast.error("Something went wrong"));
     });
   };

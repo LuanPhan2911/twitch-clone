@@ -1,5 +1,5 @@
 import { onUpdateStream } from "@/actions/stream";
-import { ToggleCard } from "@/components/toggle-card";
+import { ToggleCard } from "./toggle-card";
 import { getSelf } from "@/lib/auth-services";
 import { getStreamByUserId } from "@/lib/stream-services";
 

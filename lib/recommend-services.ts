@@ -1,4 +1,3 @@
-import { currentUser } from "@clerk/nextjs/server";
 import { db } from "./db";
 import { getSelf } from "./auth-services";
 
@@ -21,6 +20,11 @@ export const getRecommendList = async () => {
         blockedBy: {
           none: {
             blockerId: self.id,
+          },
+        },
+        blockers: {
+          none: {
+            blockedId: self.id,
           },
         },
       },
