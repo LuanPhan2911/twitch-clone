@@ -1,6 +1,5 @@
 "use client";
 import { useViewToken } from "@/hooks/use-viewer-token";
-import { Stream, User } from "@prisma/client";
 import { LiveKitRoom } from "@livekit/components-react";
 import { Video, VideoSkeleton } from "./video";
 import { useChatSidebar } from "@/stores/use-chat-sidebar";
@@ -11,11 +10,33 @@ import { Header, HeaderSkeleton } from "./header";
 import { InfoCard } from "./info-card";
 import { AboutCard } from "./about-card";
 type Props = {
-  host: User & {
-    stream: Stream | null;
-    _count: { followedBy: number };
+  host: {
+    stream: {
+      name: string;
+      id: string;
+      thumbnailUrl: string | null;
+      isLive: boolean;
+      isChatEnable: boolean;
+      isChatDelay: boolean;
+      isChatFollowerOnly: boolean;
+    } | null;
+    id: string;
+    username: string;
+    imageUrl: string;
+    bio: string | null;
+    _count: {
+      followedBy: number;
+    };
   };
-  stream: Stream;
+  stream: {
+    name: string;
+    id: string;
+    thumbnailUrl: string | null;
+    isLive: boolean;
+    isChatEnable: boolean;
+    isChatDelay: boolean;
+    isChatFollowerOnly: boolean;
+  };
   isFollowing: boolean;
 };
 export const StreamPlayer = ({ host, stream, isFollowing }: Props) => {
@@ -55,13 +76,13 @@ export const StreamPlayer = ({ host, stream, isFollowing }: Props) => {
             viewerIdentity={viewerIdentity}
             imageUrl={host.imageUrl}
             isFollowing={isFollowing}
-            name={stream.name}
+            name={stream?.name}
           />
           <InfoCard
             hostIdentity={host.id}
             viewerIdentity={viewerIdentity}
-            name={stream.name}
-            thumbnailUrl={stream.thumbnailUrl}
+            name={stream?.name}
+            thumbnailUrl={stream?.thumbnailUrl}
           />
           <AboutCard
             bio={host.bio}
@@ -77,9 +98,9 @@ export const StreamPlayer = ({ host, stream, isFollowing }: Props) => {
             hostName={host.username}
             hostIdentity={host.id}
             isFollowing={isFollowing}
-            isChatEnable={stream.isChatEnable}
-            isChatDelay={stream.isChatDelay}
-            isChatFollowerOnly={stream.isChatFollowerOnly}
+            isChatEnable={stream?.isChatEnable}
+            isChatDelay={stream?.isChatDelay}
+            isChatFollowerOnly={stream?.isChatFollowerOnly}
           />
         </div>
       </LiveKitRoom>

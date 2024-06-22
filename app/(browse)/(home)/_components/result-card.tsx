@@ -1,5 +1,5 @@
 "use client";
-import { Stream, User } from "@prisma/client";
+import { User } from "@prisma/client";
 import Link from "next/link";
 import { Thumbnail, ThumbnailSkeleton } from "./thumbnail";
 import LiveBadge from "@/components/live-badge";
@@ -26,7 +26,7 @@ export const ResultCard = ({ data }: Props) => {
           isLive={data.isLive}
           username={data.user.username}
         />
-        {data.isLive && (
+        {data.isLive && data.thumbnailUrl && (
           <div
             className="absolute top-1 right-2 group-hover:translate-x-2 
           group-hover:-translate-y-2 transition-transform"

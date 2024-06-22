@@ -16,6 +16,7 @@ export const Toggle = ({ title = "Home" }: { title?: string }) => {
           <p className="font-semibold text-primary">{title}</p>
           <ActionTooltip label={label} align="center" side="right" asChild>
             <Button
+              asChild
               className="h-auto p-2 ml-auto"
               variant={"ghost"}
               onClick={onCollapse}
@@ -27,7 +28,7 @@ export const Toggle = ({ title = "Home" }: { title?: string }) => {
       )}
       {collapsed && (
         <div className="hidden lg:flex w-full items-center justify-center pt-4 mb-4">
-          <ActionTooltip label={label} align="center" side="right">
+          <ActionTooltip label={label} align="center" side="right" asChild>
             <Button className="p-2 h-auto" variant={"ghost"} onClick={onExpand}>
               <ArrowRight className="h-5 w-5" />
             </Button>

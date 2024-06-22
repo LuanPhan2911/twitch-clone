@@ -15,7 +15,7 @@ type Props = {
   viewerIdentity: string;
   imageUrl: string;
   isFollowing: boolean;
-  name: string;
+  name?: string;
 };
 export const Header = ({
   hostIdentity,
