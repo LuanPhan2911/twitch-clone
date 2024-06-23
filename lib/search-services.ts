@@ -10,10 +10,9 @@ export const searchStreams = async (term: string) => {
     userId = null;
   }
 
-  let streams = [];
-  if (userId) {
-    streams = await db.stream.findMany({
-      where: {
+  const streams = await db.stream.findMany({
+    where: {
+      ...(userId && {
         user: {
           blockers: {
             none: {
@@ -21,73 +20,39 @@ export const searchStreams = async (term: string) => {
             },
           },
         },
-        OR: [
-          {
-            name: {
+      }),
+      OR: [
+        {
+          name: {
+            contains: term,
+          },
+        },
+        {
+          user: {
+            username: {
               contains: term,
             },
           },
-          {
-            user: {
-              username: {
-                contains: term,
-              },
-            },
-          },
-        ],
-      },
-      select: {
-        id: true,
-        name: true,
-        thumbnailUrl: true,
-        isLive: true,
-        updatedAt: true,
-        user: true,
-      },
-      orderBy: [
-        {
-          isLive: "desc",
-        },
-        {
-          updatedAt: "desc",
         },
       ],
-    });
-  } else {
-    streams = await db.stream.findMany({
-      where: {
-        OR: [
-          {
-            name: {
-              contains: term,
-            },
-          },
-          {
-            user: {
-              username: {
-                contains: term,
-              },
-            },
-          },
-        ],
+    },
+    select: {
+      id: true,
+      name: true,
+      thumbnailUrl: true,
+      isLive: true,
+      updatedAt: true,
+      user: true,
+    },
+    orderBy: [
+      {
+        isLive: "desc",
       },
-      select: {
-        id: true,
-        name: true,
-        thumbnailUrl: true,
-        isLive: true,
-        updatedAt: true,
-        user: true,
+      {
+        updatedAt: "desc",
       },
-      orderBy: [
-        {
-          isLive: "desc",
-        },
-        {
-          updatedAt: "desc",
-        },
-      ],
-    });
-  }
+    ],
+  });
+
   return streams;
 };

@@ -1,3 +1,4 @@
+import { getSelf } from "./auth-services";
 import { db } from "./db";
 
 export const getUserByUsername = async (username: string) => {
@@ -10,6 +11,7 @@ export const getUserByUsername = async (username: string) => {
       username: true,
       bio: true,
       imageUrl: true,
+      externalUserId: true,
       stream: {
         select: {
           id: true,
@@ -47,5 +49,35 @@ export const getUserById = async (id: string) => {
     return user;
   } catch (error) {
     return null;
+  }
+};
+
+export const getCommunityUsers = async () => {
+  try {
+    const self = await getSelf();
+
+    const users = await db.follow.findMany({
+      where: {
+        followingId: self.id,
+      },
+      select: {
+        follower: {
+          select: {
+            id: true,
+            username: true,
+            imageUrl: true,
+            blockedBy: {
+              where: {
+                blockerId: self.id,
+              },
+            },
+          },
+        },
+        createdAt: true,
+      },
+    });
+    return users;
+  } catch (error) {
+    return [];
   }
 };

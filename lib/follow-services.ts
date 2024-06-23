@@ -1,4 +1,3 @@
-import { FollowingUserStream } from "@/types";
 import { getSelf } from "./auth-services";
 import { db } from "./db";
 
